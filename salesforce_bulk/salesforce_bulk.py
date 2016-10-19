@@ -384,9 +384,9 @@ class SalesforceBulk(object):
         self.check_status(resp, content)
 
 
-        if self.headers()['Content-Type'] in ('application/json', 'JSON', 'application/xml; charset=UTF-8'):
+        if self.headers()['Content-Type'] in ('application/json', 'JSON'):
             result = json.loads(content)
-        else:
+        elif self.headers()['Content-Type'] in ('application/xml; charset=UTF-8'):
             tree = ET.fromstring(content)
             result = {}
             for child in tree:
